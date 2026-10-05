@@ -1,6 +1,6 @@
 [project]
 name = "litestar-google-errors"
-version = "0.1.0"
+version = "0.1.1"
 description = "Litestar plugin for Google JSON style error responses in OpenAPI (Swagger) schemas, with typed msgspec error models"
 readme = "README.md"
 requires-python = ">=3.10"

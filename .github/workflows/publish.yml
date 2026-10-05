@@ -1,8 +1,8 @@
 name: Publish to PyPI
 
 on:
-  push:
-    tags: ["v*"]
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -16,8 +16,9 @@ jobs:
       - name: Check tag matches project version
         run: |
           version=$(uv version --short)
-          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
-            echo "::error::Tag ${GITHUB_REF_NAME} does not match project version ${version}"
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "${tag}" != "${version}" ]; then
+            echo "::error::Release tag ${GITHUB_REF_NAME} does not match project version ${version} in pyproject.toml"
             exit 1
           fi
       - run: uv sync --locked
@@ -44,7 +45,7 @@ jobs:
           path: dist/
       - uses: pypa/gh-action-pypi-publish@release/v1
 
-  github-release:
+  upload-release-assets:
     needs: publish
     runs-on: ubuntu-latest
     permissions:
@@ -54,7 +55,7 @@ jobs:
         with:
           name: dist
           path: dist/
-      - name: Create GitHub release
+      - name: Attach distributions to the GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --generate-notes
+        run: gh release upload "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --clobber
