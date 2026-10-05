@@ -1,18 +1,45 @@
 [project]
 name = "litestar-google-errors"
 version = "0.1.0"
-description = "Litestar plugin that documents HTTPException responses in OpenAPI using the Google JSON error format"
+description = "Litestar plugin for Google JSON style error responses in OpenAPI (Swagger) schemas, with typed msgspec error models"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [{ name = "alexkorolex" }]
-keywords = ["litestar", "openapi", "errors", "google-json-style"]
+keywords = [
+    "litestar",
+    "litestar-plugin",
+    "openapi",
+    "swagger",
+    "errors",
+    "error-handling",
+    "http-exception",
+    "google-json-style",
+    "json-api",
+    "msgspec",
+    "asgi",
+    "rest-api",
+]
 classifiers = [
+    "Development Status :: 4 - Beta",
     "Framework :: Litestar",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
     "Typing :: Typed",
 ]
 dependencies = ["litestar>=2.16,<3"]
+
+[project.urls]
+Homepage = "https://github.com/alexkorolex/litestar-google-errors"
+Repository = "https://github.com/alexkorolex/litestar-google-errors"
+Issues = "https://github.com/alexkorolex/litestar-google-errors/issues"
 
 [dependency-groups]
 dev = ["pytest>=8", "httpx>=0.27"]
